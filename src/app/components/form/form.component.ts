@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-form',
@@ -7,7 +7,11 @@ import { Component } from '@angular/core';
 })
 export class FormComponent {
 
+  @Output() emitToParent: EventEmitter<number> = new EventEmitter<number>();
+
   selectedId!: number;
 
+  onEmit(): void {
+    this.emitToParent.emit(this.selectedId);
+  }
 }
-6

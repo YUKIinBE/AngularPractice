@@ -1,3 +1,6 @@
 <h1 class="text-center m-3">User</h1>
-<app-form></app-form>
+<app-form (emitToParent)="receiveSelectedId($event)" ></app-form>
+@if (selectedId) {
+	<p class="fw-bold">Selected ID : {{selectedId}}</p>
+}
 <app-user></app-user>

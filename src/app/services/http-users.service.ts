@@ -10,9 +10,9 @@ export class HttpUsersService {
 
   private readonly _userEndpoint: string = 'https://jsonplaceholder.typicode.com/users';
   // http: HttpClient = inject(HttpClient);
-  constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
   get(): Observable<User[]>{
-    return this.http.get<User[]>(this._userEndpoint);
+    return this._http.get<User[]>(this._userEndpoint);
   }
 }

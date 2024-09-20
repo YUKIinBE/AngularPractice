@@ -1,6 +1,2 @@
 <input [(ngModel)]="selectedId" class="form-control mb-3" type="number" placeholder="Search by ID">
-<button class="btn btn-primary mb-3">Search</button>
-
-@if (selectedId){
-<p class="fw-bold">Selected ID : {{selectedId}}</p>
-}
+<button (click)="onEmit()" class="btn btn-primary mb-3">Search</button>
