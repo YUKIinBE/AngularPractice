@@ -9,14 +9,14 @@ import { User } from './models/user.model';
 export class AppComponent {
   title = 'AngularPractice';
   selectedId!: number;
-  users!: User[];
+  usersLength!: number;
 
   receiveSelectedId(recceivedId: number): void {
     this.selectedId = recceivedId;
     console.log('selectedID collected : ', this.selectedId);
   }
 
-  receiveUsers(receivedUsers: User[]): void {
-    this.users = receivedUsers;
+  receiveUsersLength(receivedUserLength: number): void {
+    this.usersLength = receivedUserLength;
   }
 }

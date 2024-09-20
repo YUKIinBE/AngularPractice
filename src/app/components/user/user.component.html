@@ -1,4 +1,12 @@
-<p>ID: </p>
-<p>NAME: </p>
-<p>EMAIL: </p>
-<p>ADDRESS: </p>
+<div (load)="onEmit()">
+	@for (user of users; track $index) {
+		@if (!selectedId) {
+	<p>ID: {{user.id}}</p>
+	<p>NAME: {{user.name}}</p>
+	<p>EMAIL: {{user.email}}</p>
+	<p>ADDRESS: {{user.address.street}}, {{user.address.suite}}, {{user.address.zipcode}}, {{user.address.city}}</p>
+		}
+		@else {
+		}
+	}
+</div>

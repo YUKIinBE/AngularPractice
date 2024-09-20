@@ -1,7 +1,6 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpUsersService } from '../../services/http-users.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from '../../models/user.model';
+import { HttpUsersService } from '../../services/http-users.service';
 
 @Component({
   selector: 'app-user',
@@ -10,20 +9,19 @@ import { User } from '../../models/user.model';
 })
 export class UserComponent implements OnInit{
 
-  @Input() users!: User[];
-  @Output() selectedId!: number;
+  @Input() selectedId!: number;
+  @Output() emitToParent: EventEmitter<number> = new EventEmitter<number>();
+  
+  users!: User[];
 
-  myForm!: FormGroup;
-
-  constructor(
-    private _http: HttpUsersService,
-    private _fb: FormBuilder
-  ){}
+  constructor(private _http: HttpUsersService){}
 
   ngOnInit(): void {
-    this.myForm = this._fb.group({
-      
-      selectedId: ['', [Validators.required, Validators.min(1), Validators.max(this.users.length)]]
-    })
+    this._http.get().subscribe((data) => this.users = data)
+  }
+
+  onEmit(): void {
+    this.emitToParent.emit(this.users.length)
+    console.log('users.Length : ', this.users.length);
   }
 }

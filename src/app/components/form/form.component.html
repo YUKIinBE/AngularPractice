@@ -1,2 +1,12 @@
-<input [(ngModel)]="selectedId" class="form-control mb-3" type="number" placeholder="Search by ID">
-<button (click)="onEmit()" class="btn btn-primary mb-3">Search</button>
+<form [formGroup]="myForm">
+	<input formControlName="selectedId" class="form-control mb-3" type="number" placeholder="Search by ID">
+
+	@if(myForm.controls['selectedId'].touched && myForm.controls['required']){
+	<p class="text-danger">ID is required.</p>
+	}
+	@if(myForm.controls['selectedId'].touched && myForm.controls['min'] || myForm.controls['max']){
+	<p class="text-danger">ID needs to be between 1 - {{usersLength}}</p>
+	}
+
+	<button (click)="onEmit()" class="btn btn-primary mb-3">Search</button>
+</form>
