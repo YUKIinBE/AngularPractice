@@ -9,10 +9,8 @@ import { HttpUsersService } from '../../services/http-users.service';
 })
 export class FormComponent implements OnInit{
 
-  @Input({required: true}) usersLength!: number;
   @Output() emitToParent: EventEmitter<number> = new EventEmitter<number>();
 
-  selectedId!: number;
   myForm!: FormGroup;  
 
   constructor(
@@ -21,13 +19,17 @@ export class FormComponent implements OnInit{
 
   ngOnInit(): void {
     this.myForm = this._fb.group({
-      selectedId: ['', [Validators.required, Validators.min(1), Validators.max(this.usersLength)]]
+      selectedId: ['', [Validators.required, Validators.min(1)]]
     })
+
+
   }
 
   onEmit(): void {
-    this.emitToParent.emit(this.selectedId);
-    console.log('users.Length : ', this.usersLength);
-    console.log(this.selectedId);
+    this.myForm.markAllAsTouched()
+
+    if (this.myForm.valid)
+      this.emitToParent.emit(this.myForm.controls['selectedId'].value);
+    console.log(this.myForm.controls['selectedId'])
   }
 }

@@ -1,12 +1,12 @@
-<form [formGroup]="myForm">
+<form [formGroup]="myForm" (ngSubmit)="onEmit()">
 	<input formControlName="selectedId" class="form-control mb-3" type="number" placeholder="Search by ID">
 
-	@if(myForm.controls['selectedId'].touched && myForm.controls['required']){
+	@if(myForm.controls['selectedId'].touched && myForm.controls['selectedId'].errors?.['required']){
 	<p class="text-danger">ID is required.</p>
 	}
-	@if(myForm.controls['selectedId'].touched && myForm.controls['min'] || myForm.controls['max']){
-	<p class="text-danger">ID needs to be between 1 - {{usersLength}}</p>
+	@if(myForm.controls['selectedId'].touched && myForm.controls['selectedId'].errors?.['min'] || myForm.controls['selectedId'].errors?.['max']){
+	<p class="text-danger">ID needs to be at least 1.</p>
 	}
 
-	<button (click)="onEmit()" class="btn btn-primary mb-3">Search</button>
+	<button class="btn btn-primary mb-3">Search</button>
 </form>

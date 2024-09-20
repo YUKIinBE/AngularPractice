@@ -13,10 +13,6 @@ export class AppComponent {
 
   receiveSelectedId(recceivedId: number): void {
     this.selectedId = recceivedId;
-    console.log('selectedID collected : ', this.selectedId);
-  }
-
-  receiveUsersLength(receivedUserLength: number): void {
-    this.usersLength = receivedUserLength;
+    console.log('app.component selectedID collected : ', this.selectedId);
   }
 }
